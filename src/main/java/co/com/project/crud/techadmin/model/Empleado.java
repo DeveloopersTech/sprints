@@ -1,11 +1,11 @@
 package co.com.project.crud.techadmin.model;
 
 import lombok.*;
-
 @Getter @Setter
 public class Empleado {
 	
 	private String nombre;
+	private int id;
 	private String correo;
 	private String empresaAPertenecer;
 	private String rol;
@@ -18,6 +18,9 @@ public class Empleado {
 		this.empresaAPertenecer = empresaAPertenecer;
 		this.rol = rol;
 	}
-	
-	
+
+
+	public Empleado() {
+
+	}
 }

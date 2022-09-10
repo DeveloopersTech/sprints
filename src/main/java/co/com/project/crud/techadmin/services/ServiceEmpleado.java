@@ -1,24 +1,37 @@
 package co.com.project.crud.techadmin.services;
 
 import co.com.project.crud.techadmin.model.Empleado;
-import co.com.project.crud.techadmin.model.MovimientoDinero;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 
 @Service
 
 public class ServiceEmpleado {
+    ArrayList<Empleado> lista;
 
 
-    public ResponseEntity<Empleado> listarEmpleados() {
-        return null;
+    public ArrayList<Empleado> listarEmpleados(){
+        return lista;
     }
 
     public Empleado verEmpleado(int id) {
-        return null;
+        Empleado empleado = null;
+        for(Empleado i:lista) {
+            if (i.getId() == id) {
+                return i;
+            }
+        }
+        return empleado;
     }
 
     public boolean agregarEmpleado(Empleado empleado) {
+        Empleado persona = new Empleado();
+        persona.setNombre(empleado.getNombre());
+        persona.setCorreo(empleado.getCorreo());
+        persona.setEmpresaAPertenecer(empleado.getEmpresaAPertenecer());
+        persona.setRol(empleado.getRol());
+        lista.add(persona);
 
         return true;
     }
