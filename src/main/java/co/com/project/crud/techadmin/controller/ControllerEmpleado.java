@@ -1,5 +1,7 @@
-package co.com.techadmin.project.controller;
+package co.com.project.crud.techadmin.controller;
 
+import co.com.project.crud.techadmin.model.Empleado;
+import co.com.project.crud.techadmin.services.ServiceEmpleado;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -9,21 +11,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.com.techadmin.project.model.Empleado;
-import co.com.techadmin.project.service.ServiceEmpleado;
-import co.com.udea.mintic.Udeademo.domain.Persona;
 
 @RestController
 @RequestMapping("/Empleado")
 public class ControllerEmpleado {
-
-        @Autowired	
-	    ServiceEmpleado serviceEmpleado;}
+        @Autowired
+		ServiceEmpleado serviceEmpleado;
 
 
 	   @GetMapping(path="", produces="application/json")
@@ -34,7 +31,7 @@ public class ControllerEmpleado {
 
 	   
 	    @GetMapping(path="/{id}", produces="application/json")
-	    public ResponseEntity<Empleado> verEmpleado(@PathVariable int id){
+	    public ResponseEntity verEmpleado(@PathVariable int id){
 	        
 	        Empleado empleado= serviceEmpleado.verEmpleado(id);
 	        
@@ -42,6 +39,7 @@ public class ControllerEmpleado {
 	           
 	        	return new ResponseEntity<Empleado>(empleado, HttpStatus.OK);
 	        }
+			return new ResponseEntity("Error", HttpStatus.INTERNAL_SERVER_ERROR);
 	    }
 	 
 
@@ -64,7 +62,7 @@ public class ControllerEmpleado {
 	    @PatchMapping(path="/editarEmpleado/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
 	    public ResponseEntity<Empleado> actualizarEmpleado(@PathVariable int id){
 
-	    	boolean salida= serviceEmpleado.actualizarEmpleado(empleado);
+	    	boolean salida = serviceEmpleado.actualizarEmpleado(id);
 	    	
 	    	if(salida) {
 	    	
