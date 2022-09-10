@@ -1,12 +1,16 @@
 package co.com.project.crud.techadmin.services;
 
 import co.com.project.crud.techadmin.model.Empleado;
+import co.com.project.crud.techadmin.model.MovimientoDinero;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+@Service
 
 public class ServiceEmpleado {
 
-    public ResponseEntity<Empleado> listarEmpleados() {
 
+    public ResponseEntity<Empleado> listarEmpleados() {
         return null;
     }
 

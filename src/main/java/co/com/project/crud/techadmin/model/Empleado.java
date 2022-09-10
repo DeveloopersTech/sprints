@@ -4,12 +4,6 @@ import lombok.*;
 
 @Getter @Setter
 public class Empleado {
-	MovimientoDinero a = new MovimientoDinero("f");
-
-
-
-
-
 	
 	private String nombre;
 	private String correo;

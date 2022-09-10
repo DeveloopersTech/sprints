@@ -23,7 +23,7 @@ public class ControllerEmpleado {
 		ServiceEmpleado serviceEmpleado;
 
 
-	   @GetMapping(path="", produces="application/json")
+	   @GetMapping(path="/", produces="application/json")
 	    public ResponseEntity<Empleado> listar(){
 
 	        return serviceEmpleado.listarEmpleados();
