@@ -35,7 +35,7 @@ public class ControllerEmpleado {
 	           
 	        	return new ResponseEntity<Empleado>(empleado, HttpStatus.OK);
 	        }
-			return new ResponseEntity("Error", HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity("No existe el empleado", HttpStatus.INTERNAL_SERVER_ERROR);
 	    }
 	 
 	   
@@ -54,12 +54,12 @@ public class ControllerEmpleado {
 	    }
 
     
-	    @PatchMapping(path="/actualizarEmpleado/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
-	    public ResponseEntity<Empleado> actualizarEmpleado(@PathVariable int id){
+	    @PatchMapping(path="/actualizarEmpleado/{id}/modificacion", produces= MediaType.APPLICATION_JSON_VALUE)
+	    public ResponseEntity<Empleado> actualizarEmpleado(@PathVariable int id, @RequestBody Empleado modificacion){
 
-	    	boolean salida = serviceEmpleado.actualizarEmpleado(id);
+	    	boolean salida = serviceEmpleado.actualizarEmpleado(id, modificacion);
 	    	
-	    	if(salida) {
+	    	if(salida != false) {
 	    	
 	    		return new ResponseEntity("Empleado actualizado", HttpStatus.OK);
 	    	}else {
@@ -72,8 +72,11 @@ public class ControllerEmpleado {
 	    @DeleteMapping(path= "/eliminar/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
 	    public ResponseEntity<Empleado> eliminarUsuario(@PathVariable int id){
 	        
-	    	serviceEmpleado.eliminarEmpleado(id);
+	    	boolean salida= serviceEmpleado.eliminarEmpleado(id);
+	    	if(salida != false) {
 	        return new ResponseEntity("empleado eliminado", HttpStatus.OK);
+	    	}
+	    	return new ResponseEntity("usuario no encontrado", HttpStatus.INTERNAL_SERVER_ERROR);
 	    }
 
 }

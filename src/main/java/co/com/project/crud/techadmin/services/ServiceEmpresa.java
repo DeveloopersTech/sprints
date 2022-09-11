@@ -1,44 +1,46 @@
 package co.com.project.crud.techadmin.services;
 
-import co.com.project.crud.techadmin.model.Empleado;
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Service;
+
+import co.com.project.crud.techadmin.model.Empresa;
+import co.com.project.crud.techadmin.model.Empresa;
+
 @Service
-public class ServiceEmpleado {
-    
-	ArrayList<Empleado> lista= new ArrayList();
+public class ServiceEmpresa {
+
+    ArrayList<Empresa> lista= new ArrayList();
 	
-    public ArrayList<Empleado> listarEmpleados(){
+    public ArrayList<Empresa> listarEmpresas(){
         return lista;
     }
 
-    public Empleado verEmpleado(int id) {
-        Empleado empleado = null;
-        for(Empleado i:lista) {
+    public Empresa verEmpresa(int id) {
+        Empresa empresa = null;
+        for(Empresa i:lista) {
             if (i.getId() == id) {
                 return i;
             }
         }
-        return empleado;
+        return empresa;
     }
 
-    public boolean agregarEmpleado(Empleado empleado) {
-        Empleado persona = new Empleado();
-        persona.setId(empleado.getId());
-        persona.setNombre(empleado.getNombre());
-        persona.setCorreo(empleado.getCorreo());
-        persona.setEmpresaAPertenecer(empleado.getEmpresaAPertenecer());
-        persona.setRol(empleado.getRol());
-        lista.add(persona);
+    public boolean agregarEmpresa(Empresa empresa) {
+        Empresa enterprise = new Empresa();
+        enterprise.setId(empresa.getId());
+        enterprise.setNombre(empresa.getNombre());
+        enterprise.setDireccion(empresa.getDireccion());
+        enterprise.setTelefono(empresa.getTelefono());
+        enterprise.setNit(empresa.getNit());
+        lista.add(enterprise);
 
         return true;
     }
 
-    public boolean actualizarEmpleado(int id, Empleado modificacion){
+    public boolean actualizarEmpresa(int id, Empresa modificacion){
 
-    	for(Empleado i:lista) {
+    	for(Empresa i:lista) {
             if (i.getId() == id) {
             	
             	lista.remove(i);
@@ -64,12 +66,12 @@ public class ServiceEmpleado {
     	return false;
     }
 
-    public Boolean eliminarEmpleado(int id) {
+    public Boolean eliminarEmpresa(int id) {
     	
-        for(Empleado i:lista) {
+        for(Empresa i:lista) {
             if (i.getId() == id) {
                 lista.remove(i);
-                return true;
+              return true; 
             }
         }
         return false;

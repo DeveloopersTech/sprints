@@ -1,6 +1,10 @@
 package co.com.project.crud.techadmin.model;
 
+import org.springframework.stereotype.Service;
+
 import lombok.*;
+
+
 @Getter @Setter
 public class MovimientoDinero {
     private double monto;
