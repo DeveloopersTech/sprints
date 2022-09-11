@@ -6,11 +6,10 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
 @Service
-
 public class ServiceEmpleado {
-    ArrayList<Empleado> lista;
-
-
+    
+	ArrayList<Empleado> lista= new ArrayList();
+	
     public ArrayList<Empleado> listarEmpleados(){
         return lista;
     }
@@ -27,6 +26,7 @@ public class ServiceEmpleado {
 
     public boolean agregarEmpleado(Empleado empleado) {
         Empleado persona = new Empleado();
+        persona.setId(empleado.getId());
         persona.setNombre(empleado.getNombre());
         persona.setCorreo(empleado.getCorreo());
         persona.setEmpresaAPertenecer(empleado.getEmpresaAPertenecer());
@@ -42,5 +42,11 @@ public class ServiceEmpleado {
     }
 
     public void eliminarEmpleado(int id) {
+    	
+        for(Empleado i:lista) {
+            if (i.getId() == id) {
+                lista.remove(i);
+            }
+        }
     }
 }

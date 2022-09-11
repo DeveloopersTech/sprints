@@ -18,13 +18,11 @@ public class ControllerEmpleado {
 		ServiceEmpleado serviceEmpleado;
 
 
-	   @GetMapping(path="/", produces="application/json")
+	   @GetMapping(path= "/lista", produces= MediaType.APPLICATION_JSON_VALUE)
 	    public ArrayList<Empleado> listar(){
-		   ArrayList<Empleado> salida = serviceEmpleado.listarEmpleados();
-		   if(salida!=null){
-			   return salida;
-		   }
-		   return null;
+		  
+		  ArrayList<Empleado> empleado= serviceEmpleado.listarEmpleados();
+		  return empleado;
 	   }
 
 	   
@@ -40,23 +38,23 @@ public class ControllerEmpleado {
 			return new ResponseEntity("Error", HttpStatus.INTERNAL_SERVER_ERROR);
 	    }
 	 
-	    @PostMapping(path="/registrar", produces= MediaType.APPLICATION_JSON_VALUE, consumes= MediaType.APPLICATION_JSON_VALUE)
-	    public ResponseEntity<Empleado> registrar(@RequestBody Empleado empleado){
+	   
+	    @PostMapping(path = "/registrar", produces= MediaType.APPLICATION_JSON_VALUE, consumes= MediaType.APPLICATION_JSON_VALUE)
+	    public ResponseEntity<Empleado> registrar(@RequestBody Empleado persona){
 	        
-	    	boolean salida= serviceEmpleado.agregarEmpleado(empleado);
+	    	boolean salida= serviceEmpleado.agregarEmpleado(persona);
 	        
 	        if(salida) {
 	          
-	        	return new ResponseEntity<Empleado>(empleado,HttpStatus.OK);
+	        	return new ResponseEntity<Empleado>(persona,HttpStatus.OK);
 	        }else {
 	        
 	        	return new ResponseEntity("no se ha podido agregar a este empleado", HttpStatus.INTERNAL_SERVER_ERROR);
 	        }	
 	    }
 
-
-	    
-	    @PatchMapping(path="/editarEmpleado/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
+    
+	    @PatchMapping(path="/actualizarEmpleado/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
 	    public ResponseEntity<Empleado> actualizarEmpleado(@PathVariable int id){
 
 	    	boolean salida = serviceEmpleado.actualizarEmpleado(id);
@@ -71,10 +69,10 @@ public class ControllerEmpleado {
 	    }
 	    
 
-	    @DeleteMapping("/eliminar/{id}")
+	    @DeleteMapping(path= "/eliminar/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
 	    public ResponseEntity<Empleado> eliminarUsuario(@PathVariable int id){
-	        serviceEmpleado.eliminarEmpleado(id);
 	        
+	    	serviceEmpleado.eliminarEmpleado(id);
 	        return new ResponseEntity("empleado eliminado", HttpStatus.OK);
 	    }
 
