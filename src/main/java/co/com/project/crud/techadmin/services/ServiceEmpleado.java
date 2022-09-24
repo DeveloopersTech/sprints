@@ -1,17 +1,24 @@
 package co.com.project.crud.techadmin.services;
 
 import co.com.project.crud.techadmin.model.Empleado;
+import co.com.project.crud.techadmin.repository.EmpleadoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
 @Service
 public class ServiceEmpleado {
-    
-	ArrayList<Empleado> lista= new ArrayList();
-	
-    public ArrayList<Empleado> listarEmpleados(){
-        return lista;
+
+	/*ArrayList<Empleado> lista= new ArrayList();*/
+
+    //Primer instanciamos el repositorio
+    private EmpleadoRepository repository;
+    public ServiceEmpleado(EmpleadoRepository repository){
+        this.repository = repository
+    }
+
+    public List<Empleado> listarEmpleados(){
+        return this.repository.findAll();
     }
 
     public Empleado verEmpleado(int id) {
