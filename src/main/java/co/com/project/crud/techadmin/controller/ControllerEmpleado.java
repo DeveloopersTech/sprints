@@ -19,10 +19,8 @@ public class ControllerEmpleado {
 
 
 	   @GetMapping(path= "/lista", produces= MediaType.APPLICATION_JSON_VALUE)
-	    public ArrayList<Empleado> listar(){
-		  
-		  ArrayList<Empleado> empleado= serviceEmpleado.listarEmpleados();
-		  return empleado;
+	    public ResponseEntity<Object> listar(){
+		  return new ResponseEntity<Object>(serviceEmpleado.listarEmpleados(), HttpStatus.OK);
 	   }
 
 	   

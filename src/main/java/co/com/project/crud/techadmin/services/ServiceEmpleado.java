@@ -1,24 +1,24 @@
 package co.com.project.crud.techadmin.services;
 
 import co.com.project.crud.techadmin.model.Empleado;
-import co.com.project.crud.techadmin.repository.EmpleadoRepository;
+import co.com.project.crud.techadmin.repository.EntityEmpleado;
+import co.com.project.crud.techadmin.repository.RepositoryEmpleado;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ServiceEmpleado {
 
-	/*ArrayList<Empleado> lista= new ArrayList();*/
+    //Primero instanciamos el repositorio
+    @Autowired
+    RepositoryEmpleado repositoryEmpleado;
 
-    //Primer instanciamos el repositorio
-    private EmpleadoRepository repository;
-    public ServiceEmpleado(EmpleadoRepository repository){
-        this.repository = repository
-    }
+    public  List<EntityEmpleado> listarEmpleados(){
+        List<EntityEmpleado> List = repositoryEmpleado.findAll();
+        return List;
 
-    public List<Empleado> listarEmpleados(){
-        return this.repository.findAll();
     }
 
     public Empleado verEmpleado(int id) {
