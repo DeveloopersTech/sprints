@@ -63,6 +63,7 @@ public class ControllerEmpresa {
 
 
     @PatchMapping(path="/actualizarEmpresa/{id}/modificacion", produces= MediaType.APPLICATION_JSON_VALUE)
+    // OJOOOOOOOOOOOOOOOOOOOOOOOOOOO
     public ResponseEntity<Empresa> actualizarEmpresa(@PathVariable int id, @RequestBody Empresa modificacion){
 
     	boolean salida = serviceEmpresa.actualizarEmpresa(id, modificacion);
