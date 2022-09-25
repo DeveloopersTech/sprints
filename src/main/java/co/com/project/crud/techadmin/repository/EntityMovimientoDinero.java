@@ -7,30 +7,23 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name="MovimientoDinero")
+@Table(name="movimientodinero")
 @Getter @Setter
 public class EntityMovimientoDinero {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     @Column(name="monto")
-    private double monto;
+    private Double monto;
 
     @Column(name="modificarConcepto")
     private String modificarConcepto;
 
-    @Column(name="usuario")
-    private String usuario;
+    @Column(name="empleado")
+    private String empleado;
 
-    
-
-    //Modificar Monto
-    public void consignar(int cantidad)
-
-    {
-    	this.monto = this.monto + cantidad;
+    public EntityMovimientoDinero() {
     }
-
 }
