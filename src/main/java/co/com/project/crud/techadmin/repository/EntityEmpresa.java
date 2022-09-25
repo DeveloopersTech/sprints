@@ -12,7 +12,7 @@ public class EntityEmpresa {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private Long id;
 
 	@Column(name="nombre")
 	private String nombre;
@@ -26,6 +26,6 @@ public class EntityEmpresa {
 	@Column(name="nit")
 	private int nit;
 
-	public EntityEmpresa(){}
+	
 }
 

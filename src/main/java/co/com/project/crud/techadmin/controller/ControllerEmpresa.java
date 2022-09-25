@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.com.project.crud.techadmin.model.Empresa;
+import co.com.project.crud.techadmin.repository.EntityEmpresa;
 import co.com.project.crud.techadmin.services.ServiceEmpresa;
 import co.com.project.crud.techadmin.services.ServiceEmpresa;
 
@@ -25,7 +26,31 @@ public class ControllerEmpresa {
 	@Autowired
 	ServiceEmpresa serviceEmpresa;
 
+	@GetMapping(path= "/lista", produces= MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object> listarTodo(){
+	  return new ResponseEntity<Object>(serviceEmpresa.listarEmpresas(), HttpStatus.OK);
+   }
 
+   @PostMapping(path = "/registrar", produces= MediaType.APPLICATION_JSON_VALUE, consumes= MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Boolean> registrar(@RequestBody EntityEmpresa empleado){
+	       
+	   return new ResponseEntity<Boolean>(serviceEmpresa.insertarEmpresa(empleado), HttpStatus.OK);      
+   }
+   
+   @PatchMapping(path="/actualizarEmpresa/modificacion", produces= MediaType.APPLICATION_JSON_VALUE, consumes= MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Boolean> actualizarEmpresa(@RequestBody EntityEmpresa empleado){
+
+	   return new ResponseEntity<Boolean>(serviceEmpresa.actualizarParcialEmpresa(empleado), HttpStatus.OK);
+   }
+   
+   @DeleteMapping(path= "/eliminar/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
+    public void eliminarEmpresa(@PathVariable Long id){
+	   
+	   serviceEmpresa.borrarEmpresa(id);
+	   
+   }
+
+/*
    @GetMapping(path= "/lista", produces= MediaType.APPLICATION_JSON_VALUE)
     public ArrayList<Empresa> listar(){
 	  
@@ -87,5 +112,5 @@ public class ControllerEmpresa {
     	}
     	return new ResponseEntity("empresa no encontrada", HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
+*/
 }

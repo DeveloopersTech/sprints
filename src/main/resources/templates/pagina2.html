@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"> <!-- agrgamos thymeleaf al html, ya podremos interactuar bidireccionalmente entre esta vista y el backend con componentes -->
+<head>
+  <meta charset="utf-8">
+  <title>HTML</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  
+</head>
+
+<body>
+  <p>Soy la pagina dos.</p>
+  <button class="boton">hola</button>
+  
+  <button type="button" onclick="location.href='/'">Ir a home</button>
+  
+  <!-- con th llamamos a thymeleaf para utilizarlo 
+       tymeleaf tiene muchos metodos, vamos a usar each para iterar y plasmar sobre la data que almacenamos 
+       en el modelo llamado personas que traemos desde el controllerfronted:-->
+  <div th:each= "itemP: ${empleados}">
+     <!-- plasmamos la data de los nombres que nos viene en el modelo-->
+     <h2 th:text= "{itemP.nombre}"></h2>
+     
+     <!-- el metodo switch nos permitira que dependiendo del rol se muestre una imagen otra en este caso: 
+          como en este caso el rol es un enum toca especificar el tipo de dato osea name (recuerda que tambien
+          esta el ordinal), esto se hace solo para este tipo de dato especial: -->
+     <div th:switch = "${itemP.rol.name}">
+         <img th:case= "'ADMIN'"  alt="" src="">
+         <img th:case= "'OPERATIVO'"  alt="" src="">         
+     </div>
+     
+  </div>
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+  
+</body>
+</html>

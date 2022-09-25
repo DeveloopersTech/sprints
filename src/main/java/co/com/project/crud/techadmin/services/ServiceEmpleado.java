@@ -20,7 +20,65 @@ public class ServiceEmpleado {
         return List;
 
     }
+    
+    public Boolean insertarEmpleado(EntityEmpleado empleado) {
+    	
+    	try {
+    	repositoryEmpleado.save(empleado);
+    	}catch(Exception e) {
+    		return false;
+    	}
+    	
+    	return true;	
+    }
+    
+    //actualización parcial PATCH:
+    public Boolean actualizarParcialEmpleado(EntityEmpleado empleado) {
+    
+     try {
+    	EntityEmpleado empleadoTemp= repositoryEmpleado.findById(empleado.getId()).orElse(null);
+    	
+    	if(empleado.getNombre() != null) {
+    		empleadoTemp.setNombre(empleado.getNombre());
+    		
+    	}
+    	if(empleado.getCorreo() != null) {
+    	
+    		empleadoTemp.setCorreo(empleado.getCorreo());
 
+    	}
+    	if(empleado.getEmpresaAPertenecer() != null){
+    	    
+    		empleadoTemp.setEmpresaAPertenecer(empleado.getEmpresaAPertenecer());	
+    	}
+    		
+    	if(empleado.getRol() != null) {
+    	    empleadoTemp.setRol(empleado.getRol());	
+    	    
+    	}
+    	
+    	repositoryEmpleado.save(empleadoTemp);
+    	
+     }catch(Exception e) {
+    	 return false;
+     }
+    	
+    	return true;
+       
+    }
+    
+    
+    //Delete empleado:
+    public void borrarEmpleado(Long id) {
+    	
+    	repositoryEmpleado.deleteById(id);
+    }
+    
+    
+    
+    
+
+    /*
     public Empleado verEmpleado(int id) {
         Empleado empleado = null;
         for(Empleado i:lista) {
@@ -64,7 +122,7 @@ public class ServiceEmpleado {
             		i.setRol(modificacion.getRol());
             	}
             	return true;
-            	*/
+            	
             	return true;
             }
         }
@@ -81,4 +139,7 @@ public class ServiceEmpleado {
         }
         return false;
     }
+    */
+    
+    
 }

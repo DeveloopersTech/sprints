@@ -24,7 +24,7 @@ public class EntityMovimientoDinero {
     @Column(name="usuario")
     private String usuario;
 
-
+    
 
     //Modificar Monto
     public void consignar(int cantidad)

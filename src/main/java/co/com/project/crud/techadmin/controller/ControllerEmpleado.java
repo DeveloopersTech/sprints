@@ -1,6 +1,7 @@
 package co.com.project.crud.techadmin.controller;
 
 import co.com.project.crud.techadmin.model.Empleado;
+import co.com.project.crud.techadmin.repository.EntityEmpleado;
 import co.com.project.crud.techadmin.services.ServiceEmpleado;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,10 +20,30 @@ public class ControllerEmpleado {
 
 
 	   @GetMapping(path= "/lista", produces= MediaType.APPLICATION_JSON_VALUE)
-	    public ResponseEntity<Object> listar(){
+	    public ResponseEntity<Object> listarTodo(){
 		  return new ResponseEntity<Object>(serviceEmpleado.listarEmpleados(), HttpStatus.OK);
 	   }
 
+	   @PostMapping(path = "/registrar", produces= MediaType.APPLICATION_JSON_VALUE, consumes= MediaType.APPLICATION_JSON_VALUE)
+	    public ResponseEntity<Boolean> registrar(@RequestBody EntityEmpleado empleado){
+		       
+		   return new ResponseEntity<Boolean>(serviceEmpleado.insertarEmpleado(empleado), HttpStatus.OK);      
+	   }
+	   
+	   @PatchMapping(path="/actualizarEmpleado/modificacion", produces= MediaType.APPLICATION_JSON_VALUE, consumes= MediaType.APPLICATION_JSON_VALUE)
+	    public ResponseEntity<Boolean> actualizarEmpleado(@RequestBody EntityEmpleado empleado){
+
+		   return new ResponseEntity<Boolean>(serviceEmpleado.actualizarParcialEmpleado(empleado), HttpStatus.OK);
+	   }
+	   
+	   @DeleteMapping(path= "/eliminar/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
+	    public void eliminarEmpleado(@PathVariable Long id){
+		   
+		   serviceEmpleado.borrarEmpleado(id);
+		   
+	   }
+	   
+	   /*
 	   
 	    @GetMapping(path="/{id}", produces="application/json")
 	    public ResponseEntity verEmpleado(@PathVariable int id){
@@ -76,5 +97,7 @@ public class ControllerEmpleado {
 	    	}
 	    	return new ResponseEntity("usuario no encontrado", HttpStatus.INTERNAL_SERVER_ERROR);
 	    }
+	    
+	    */
 
 }
