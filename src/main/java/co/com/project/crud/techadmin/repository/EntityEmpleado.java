@@ -6,12 +6,13 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name="Empleado")
+@Table(name="empleado")
 
 @Getter @Setter
 public class EntityEmpleado {
+
+	//@GeneratedValue(strategy =
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	@Column(name="nombre")

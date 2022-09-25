@@ -26,6 +26,7 @@ public class EntityEmpresa {
 	@Column(name="nit")
 	private int nit;
 
-	
+	public EntityEmpresa() {
+	}
 }
 
