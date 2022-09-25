@@ -1,8 +1,141 @@
-.container-form{
-	width: 300px;
+html,
+body {
+    font-family: sans-serif;
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
 }
 
-form{
-	width: 400px;
-	
+p {
+    margin-block-start: 0;
+    text-indent: 1rem;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background-color: lightgray;
+    width: 40px;
+    margin: 1.5rem 0 1rem 0;
+}
+
+
+#root {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+#main-page {
+    flex-grow: 1;
+    max-width: 75%;
+}
+
+.sidebar {
+    width:25%;
+    background-color: grey;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    row-gap: 20px;
+
+    border-right: 1px solid lightgray;
+}
+
+#root .sidebar .container-image{
+    width: 100%;
+    height: 180px;
+    text-align: center;
+
+}
+
+#root .sidebar .container-image a{
+    width: 100%;
+}
+
+#root .sidebar .container-image a img{
+    width: 60%;
+    height: 100%;
+}
+
+#root .sidebar .container-botom{
+    width: 100%;
+    height: 50px;
+    background-color: rgba(9, 67, 128, 0.747);
+    border-radius: 7px;
+    cursor: pointer;
+}
+#root .sidebar .container-botom a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: aliceblue;
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.align-center {
+    align-items: center;
+}
+
+body .container-table{
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+}
+body .container-table .table{
+    border-top: 1px solid black;
+    width: 90%;
+    margin: 20px 20px;
+    
+}
+
+.socials-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.socials-card {
+    display: flex;
+    align-items: center;
+
+    border: 1px solid lightgray;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    margin: 1rem;
+
+    text-decoration: none;
+    color: unset;
+}
+
+.socials-card:hover {
+    background-color: lightgray;
+}
+
+.socials-card > i {
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+}
+
+
+.container-add{
+    color: white;
+    width: 200px;
+    height: 50px;
+    background-color: rgb(19, 158, 10);
+    margin-top: 50px;
+    margin-left: 46px;
+    cursor: pointer;
+}
+
+.container-add button{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
