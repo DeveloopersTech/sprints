@@ -30,8 +30,6 @@
         <th scope="col">NIT</th>
         <th scope="col">Editar</th>
         <th scope="col">Eliminar</th>
-
-
       </tr>
     </thead>
     <tbody>
@@ -84,9 +82,9 @@
   </table>
 </div>
 </div>
-
+//
 <!-- Modal -->
-<div id="ventana-modal" class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div  class="modal fade" id="exampleModalCenter ventana-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -96,11 +94,11 @@
         </button>
       </div>
       <div class="modal-body">
-        <form class="d-flex flex-column gap-3 align-items-center" th:action="@{/persona/udea/mintic/insertarPersonaRol}" th:method="post" th:object="${Npersona}">
-          <input th:field="*{nombre}" class="form-control" type="text" placeholder="Nombre"/>
-          <input th:field="*{telefono}" class="form-control" type="text" placeholder="Telefono"/>
-          <input th:field="*{direccion}" class="form-control" type="text" placeholder="Direccion"/>
-          <input th:field="*{nit}" class="form-control" type="text" placeholder="Nit"/>
+        <form class="d-flex flex-column gap-3 align-items-center" > //th:action="@{/persona/udea/mintic/insertarPersonaRol}" th:method="post" th:object="${Npersona}"
+          <input  class="form-control" type="text" placeholder="Nombre"/> //th:field="*{nombre}"
+          <input  class="form-control" type="text" placeholder="Telefono"/> //th:field="*{telefono}"
+          <input  class="form-control" type="text" placeholder="Direccion"/> //th:field="*{direccion}"
+          <input  class="form-control" type="text" placeholder="Nit"/> //th:field="*{nit}"
       </form>
       </div>  
       <div class="modal-footer">

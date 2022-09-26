@@ -38,6 +38,33 @@ public class ControllerFrontend {
 		//retornamos el index.html que esta en el template:
 		return "home";
 	}
+
+	// MEEEEE
+	@GetMapping(path= "/empleado")
+	//retornaremos cadenas de caracteres (los html)
+	public String empleado(Model modelo) {
+		List<EntityEmpleado> listaempleados = serviceEmpleado.listarEmpleados();
+		modelo.addAttribute("empleado", listaempleados);
+		//retornamos el empleado.html que esta en el template:
+		return "empleado";
+	}
+
+	@GetMapping(path= "/empresa")
+	//retornaremos cadenas de caracteres (los html)
+	public String empresa() {
+
+		//retornamos el empresa.html que esta en el template:
+		return "empresa";
+	}
+
+	@GetMapping(path= "/movimiento")
+	//retornaremos cadenas de caracteres (los html)
+	public String movimiento() {
+
+		//retornamos el movimiento.html que esta en el template:
+		return "movimiento";
+	}
+
 	
 	@GetMapping(path= "/pagina2")
 	//el Model va a generar la comunicacion entre la vista(los html) y este backend

@@ -77,7 +77,7 @@
 </div>
 
 <!-- Modal -->
-<div id="ventana-modal" class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div id="ventana-modal exampleModalCenter" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -87,10 +87,10 @@
         </button>
       </div>
       <div class="modal-body">
-        <form class="d-flex flex-column gap-3 align-items-center" th:action="@{/persona/udea/mintic/insertarPersonaRol}" th:method="post" th:object="${Npersona}">
-          <input th:field="*{monto}" class="form-control" type="text" placeholder="Monto"/>
-          <input th:field="*{concepto}" class="form-control" type="text" placeholder="Concepto"/>
-          <input th:field="*{usuario}" class="form-control" type="text" placeholder="Usuario"/>
+        <form class="d-flex flex-column gap-3 align-items-center" >  //th:action="@{/persona/udea/mintic/insertarPersonaRol}" th:method="post" th:object="${Npersona}"
+          <input  class="form-control" type="text" placeholder="Monto"/> //th:field="*{monto}"
+          <input class="form-control" type="text" placeholder="Concepto"/> //th:field="*{concepto}"
+          <input  class="form-control" type="text" placeholder="Usuario"/> //th:field="*{usuario}"
       </form>
       </div>  
       <div class="modal-footer">
