@@ -2,6 +2,10 @@ package co.com.project.crud.techadmin.controller;
 
 import java.util.List;
 
+import co.com.project.crud.techadmin.repository.EntityEmpresa;
+import co.com.project.crud.techadmin.repository.EntityMovimientoDinero;
+import co.com.project.crud.techadmin.services.ServiceEmpresa;
+import co.com.project.crud.techadmin.services.ServiceMovimientoDinero;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
@@ -17,8 +21,14 @@ import co.com.project.crud.techadmin.services.ServiceEmpleado;
 public class ControllerFrontend {
 	
 	//ejecutamos la llamada al service:
-			@Autowired
-			ServiceEmpleado serviceEmpleado;
+	@Autowired
+	ServiceEmpleado serviceEmpleado;
+	@Autowired
+	ServiceEmpresa serviceEmpresa;
+
+	@Autowired
+	ServiceMovimientoDinero serviceMovimientoDinero;
+
 			
 	
 	//lo marcamos como una interfaz Rest
@@ -51,16 +61,18 @@ public class ControllerFrontend {
 
 	@GetMapping(path= "/empresa")
 	//retornaremos cadenas de caracteres (los html)
-	public String empresa() {
-
+	public String empresa(Model modelo) {
+		List<EntityEmpresa> listaempresas = serviceEmpresa.listarEmpresas();
+		modelo.addAttribute("empresa", listaempresas);
 		//retornamos el empresa.html que esta en el template:
 		return "empresa";
 	}
 
 	@GetMapping(path= "/movimiento")
 	//retornaremos cadenas de caracteres (los html)
-	public String movimiento() {
-
+	public String movimiento(Model modelo) {
+		List<EntityMovimientoDinero> listamovimientos = serviceMovimientoDinero.listarMovimientoDinero();
+		modelo.addAttribute("movimiento", listamovimientos);
 		//retornamos el movimiento.html que esta en el template:
 		return "movimiento";
 	}
