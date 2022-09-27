@@ -4,6 +4,8 @@ body {
     margin: 0px;
     padding: 0px;
     height: 100%;
+
+
 }
 
 p {
@@ -24,6 +26,8 @@ hr {
     display: flex;
     width: 100%;
     height: 100%;
+    background-color: #f1f1fd;
+
 }
 
 #main-page {
@@ -33,14 +37,16 @@ hr {
 
 .sidebar {
     width:25%;
-    background-color: grey;
+    background-color: #f1f1fd;
     display: flex;
     flex-direction: column;
     padding: 1rem;
     row-gap: 20px;
-
-    border-right: 1px solid lightgray;
+    left: 50%;
+    transform: translate(150%);
+    border-right: 1px;
 }
+
 
 #root .sidebar .container-image{
     width: 100%;

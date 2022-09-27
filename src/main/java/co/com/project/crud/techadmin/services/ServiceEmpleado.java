@@ -37,7 +37,7 @@ public class ServiceEmpleado {
     
      try {
     	EntityEmpleado empleadoTemp= repositoryEmpleado.findById(empleado.getId()).orElse(null);
-    	
+
     	if(empleado.getNombre() != null) {
     		empleadoTemp.setNombre(empleado.getNombre());
     		
@@ -73,9 +73,8 @@ public class ServiceEmpleado {
     	
     	repositoryEmpleado.deleteById(id);
     }
-    
-    
-    
+
+
     
 
     /*

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import co.com.project.crud.techadmin.repository.EntityEmpleado;
 import co.com.project.crud.techadmin.services.ServiceEmpleado;
+import org.springframework.web.servlet.view.RedirectView;
 
 //se va a encargar de hacer el mapeo de mis clases frontend
 
@@ -77,7 +78,73 @@ public class ControllerFrontend {
 		return "movimiento";
 	}
 
-	
+	//lode pau------------------------------------------------------------------------
+
+	@GetMapping(path= "/formularioMovimiento")
+	//retornaremos cadenas de caracteres (los html)
+	public String formularioMovimiento() {
+
+		//retornamos el movimiento.html que esta en el template:
+		return "formularioMovimiento";
+	}
+	@GetMapping(path= "/formularioEmpresa")
+	//retornaremos cadenas de caracteres (los html)
+	public String formularioEmpresa() {
+
+		//retornamos el movimiento.html que esta en el template:
+		return "formularioEmpresa";
+	}
+
+	@GetMapping(path= "/formularioEmpresaEditar")
+	//retornaremos cadenas de caracteres (los html)
+	public String formularioEmpresaEditar() {
+
+		//retornamos el movimiento.html que esta en el template:
+		return "formularioEmpresaEditar";
+	}
+
+	@GetMapping(path= "/formularioEmpleadoEditar")
+	//retornaremos cadenas de caracteres (los html)
+	public String formularioEmpleadoEditar() {
+
+		//retornamos el movimiento.html que esta en el template:
+		return "formularioEmpleadoEditar";
+	}
+
+	@GetMapping(path= "/formularioMovimientoEditar")
+	//retornaremos cadenas de caracteres (los html)
+	public String formularioMovimientoEditar() {
+
+		//retornamos el movimiento.html que esta en el template:
+		return "formularioMovimientoEditar";
+	}
+
+	@GetMapping(path= "/formularioEmpleado")
+	//retornaremos cadenas de caracteres (los html)
+	public String formularioEmpleado(Model modelo){
+		//retornamos el movimiento.html que esta en el template:
+		modelo.addAttribute( "Nempleado", new EntityEmpleado());
+		return "formularioEmpleado";
+	}
+
+
+	@PostMapping(path= "/formularioEmpleado")
+	//el Model va a generar la comunicacion entre la vista(los html) y este backend
+	public RedirectView formularioEmpleado(@ModelAttribute EntityEmpleado empleado, Model modelo){
+
+		modelo.addAttribute(empleado);
+		if(serviceEmpleado.insertarEmpleado(empleado).equals(Boolean.TRUE)){
+			return new RedirectView("*/index");
+		}else{
+			return new RedirectView("/error");//HAY QUE HACER ESTA PÁGINA DE ERROS
+		}
+
+	}
+
+
+
+
+	//pauuuuu-------------------------------------------------------------------------------
 	@GetMapping(path= "/pagina2")
 	//el Model va a generar la comunicacion entre la vista(los html) y este backend
     public String pagina2(Model modelo) {
@@ -95,3 +162,5 @@ public class ControllerFrontend {
 	}
 
 }
+
+
