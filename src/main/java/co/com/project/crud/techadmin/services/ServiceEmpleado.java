@@ -21,6 +21,7 @@ public class ServiceEmpleado {
 
     }
     
+    //Insertar Empleado POST:
     public Boolean insertarEmpleado(EntityEmpleado empleado) {
     	
     	try {
@@ -30,6 +31,14 @@ public class ServiceEmpleado {
     	}
     	
     	return true;	
+    }
+    
+    //Buscar persona por Id:
+    public EntityEmpleado buscarEmpleadoId( Long id ) {
+    	
+    	EntityEmpleado empleadoTemp= repositoryEmpleado.findById(id).orElse(null);
+    	
+    	return empleadoTemp;
     }
     
     //actualización parcial PATCH:
@@ -69,9 +78,15 @@ public class ServiceEmpleado {
     
     
     //Delete empleado:
-    public void borrarEmpleado(Long id) {
+    public Boolean borrarEmpleado(Long id) {
     	
+    	if(id != null) {
     	repositoryEmpleado.deleteById(id);
+    	
+    	return true;
+    	}
+    	
+    	return false;
     }
 
 

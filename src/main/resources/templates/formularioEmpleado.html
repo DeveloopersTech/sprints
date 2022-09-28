@@ -12,14 +12,16 @@
 
 <div class="d-flex flex-column align-items-center px-4 py-5 my-5 text-center">
     <h1> Nuevo Empleado </h1>
-    <form class="d-flex flex-column gap-3 align-items-center" th:action="@{}" th:method="post" th:object="${}" >
+    <!-- la data que ingresemos en el form vamos a enviarsela a la url que colocamos en action y que 
+    estaría en controllerEmpleado: -->
+    <form class="d-flex flex-column gap-3 align-items-center" th:action="@{/empleado/registrar}" th:method="post" th:object="${nuevoEmpleado}" >
         <input th:field="*{nombre}" class="form-control" type="text" placeholder="Nombre"/>
         <input th:field="*{correo}"class="form-control" type="text" placeholder="Correo"/>
-        <input th:field="*{empresa}" class="form-control" type="text" placeholder="Empresa"/>
-        <label th:field="*{rol}">Elije un rol:</label> //---------------------SE LE QUITÓ EL for="select"
-        <select  name="select">
-            <option value="value1">Admin</option>
-            <option value="value2" selected>Operativo</option>
+        <input th:field="*{empresaAPertenecer}" class="form-control" type="text" placeholder="Empresa"/>
+        <label for="select">Elije un rol:</label>
+        <select  name="select" th:field="*{rol}">
+            <option value="Admin">Admin</option>
+            <option value="Operativo" selected>Operativo</option>
         </select>
         <button class = "btn btn-primary" type="submit">Enviar</button>
     </form>

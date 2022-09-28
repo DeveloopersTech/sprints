@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import co.com.project.crud.techadmin.repository.EntityEmpleado;
 import co.com.project.crud.techadmin.services.ServiceEmpleado;
@@ -48,6 +47,14 @@ public class ControllerFrontend {
 		
 		//retornamos el index.html que esta en el template:
 		return "home";
+	}
+	
+	@GetMapping(path= "/404")
+	//retornaremos cadenas de caracteres (los html)
+	public String error() {
+		
+		//retornamos el index.html que esta en el template:
+		return "404";
 	}
 
 	// MEEEEE
@@ -94,6 +101,7 @@ public class ControllerFrontend {
 		//retornamos el movimiento.html que esta en el template:
 		return "formularioEmpresa";
 	}
+	
 
 	@GetMapping(path= "/formularioEmpresaEditar")
 	//retornaremos cadenas de caracteres (los html)
@@ -103,13 +111,7 @@ public class ControllerFrontend {
 		return "formularioEmpresaEditar";
 	}
 
-	@GetMapping(path= "/formularioEmpleadoEditar")
-	//retornaremos cadenas de caracteres (los html)
-	public String formularioEmpleadoEditar() {
-
-		//retornamos el movimiento.html que esta en el template:
-		return "formularioEmpleadoEditar";
-	}
+	
 
 	@GetMapping(path= "/formularioMovimientoEditar")
 	//retornaremos cadenas de caracteres (los html)
@@ -119,26 +121,34 @@ public class ControllerFrontend {
 		return "formularioMovimientoEditar";
 	}
 
+
+
+	//Model Post:
+	
+	
+	//el Model va a generar la comunicacion entre la vista(los html) y este backend
+	//el ModelAttribute se encargara de que todo lo que viaje en el form sea englobado
+	//el Metodo de tipo RedirectView lo que hará es enviarnos a una vista cuando el proceso POST de succes
 	@GetMapping(path= "/formularioEmpleado")
-	//retornaremos cadenas de caracteres (los html)
 	public String formularioEmpleado(Model modelo){
-		//retornamos el movimiento.html que esta en el template:
-		modelo.addAttribute( "Nempleado", new EntityEmpleado());
+
+		/*con la instancia new le entragamos al frontend (formulario) el modelo de empleado vacio para ser
+		llenado:*/
+		modelo.addAttribute("nuevoEmpleado", new EntityEmpleado());
+		
 		return "formularioEmpleado";
 	}
-
-
-	@PostMapping(path= "/formularioEmpleado")
-	//el Model va a generar la comunicacion entre la vista(los html) y este backend
-	public RedirectView formularioEmpleado(@ModelAttribute EntityEmpleado empleado, Model modelo){
-
-		modelo.addAttribute(empleado);
-		if(serviceEmpleado.insertarEmpleado(empleado).equals(Boolean.TRUE)){
-			return new RedirectView("*/index");
-		}else{
-			return new RedirectView("/error");//HAY QUE HACER ESTA PÁGINA DE ERROS
-		}
-
+	
+	
+	//El id es para saber cual es el empleado a editar
+	@GetMapping(path= "/formularioEmpleadoEditar/{id}")
+	public String formularioEmpleadoEditar(Model modelo, @PathVariable Long id){
+		
+		EntityEmpleado empleadoTemp= serviceEmpleado.buscarEmpleadoId(id);
+		/*enviamos el objeto con la data llena en el modelo*/
+		modelo.addAttribute("Eempleado", empleadoTemp);
+		
+		return "formularioEmpleadoEditar";
 	}
 
 

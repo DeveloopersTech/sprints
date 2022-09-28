@@ -7,12 +7,11 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="empleado")
-
 @Getter @Setter
 public class EntityEmpleado {
 
-	//@GeneratedValue(strategy =
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	@Column(name="nombre")
@@ -25,6 +24,10 @@ public class EntityEmpleado {
 	private String rol;
 
 
+	public EntityEmpleado() {
+
+	}
+	
 	public EntityEmpleado(String nombre, String correo, String empresaAPertenecer, String rol) {
 		super();
 		this.nombre = nombre;
@@ -34,7 +37,4 @@ public class EntityEmpleado {
 	}
 
 
-	public EntityEmpleado() {
-
-	}
 }

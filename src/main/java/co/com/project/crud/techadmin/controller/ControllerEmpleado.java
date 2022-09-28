@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.ArrayList;
 
@@ -23,12 +25,32 @@ public class ControllerEmpleado {
 	    public ResponseEntity<Object> listarTodo(){
 		  return new ResponseEntity<Object>(serviceEmpleado.listarEmpleados(), HttpStatus.OK);
 	   }
-
+/*
 	   @PostMapping(path = "/registrar", produces= MediaType.APPLICATION_JSON_VALUE, consumes= MediaType.APPLICATION_JSON_VALUE)
 	    public ResponseEntity<Boolean> registrar(@RequestBody EntityEmpleado empleado){
 		       
 		   return new ResponseEntity<Boolean>(serviceEmpleado.insertarEmpleado(empleado), HttpStatus.OK);      
-	   }
+	   }*/
+	   
+	   //Recibimos la data que nos envia el Model desde el formulario en nuestro path /registrar
+	   //el Model va a generar la comunicacion entre la vista(los html) y este backend
+		/*el ModelAttribute se encargara de que todo lo que viaje en el form sea englobado y que sea del mismo
+	      tipo al modelo entidad*/
+		//el Metodo de tipo RedirectView lo que hará es enviarnos a una vista cuando el proceso POST de succes
+		@PostMapping(path= "/registrar")
+		public RedirectView formularioEmpleado(@ModelAttribute EntityEmpleado empleado, Model modelo){
+
+			//con la instancia new le entragamos al frontend el modelo de empleado vacio:
+			modelo.addAttribute("nuevoEmpleado", empleado);
+			//entonces si es true la insercion del empleado a la DB nos redireccionara a la pagina /empleado
+			if(serviceEmpleado.insertarEmpleado(empleado).equals(Boolean.TRUE)){
+				return new RedirectView("/empleado");
+			}else{
+				return new RedirectView("/404");//HAY QUE HACER ESTA PÁGINA DE ERROS
+			}
+
+		}
+	   
 	   
 	   @PatchMapping(path="/actualizarEmpleado/modificacion", produces= MediaType.APPLICATION_JSON_VALUE, consumes= MediaType.APPLICATION_JSON_VALUE)
 	    public ResponseEntity<Boolean> actualizarEmpleado(@RequestBody EntityEmpleado empleado){
@@ -37,9 +59,14 @@ public class ControllerEmpleado {
 	   }
 	   
 	   @DeleteMapping(path= "/eliminar/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
-	    public void eliminarEmpleado(@PathVariable Long id){
+	    public RedirectView eliminarEmpleado(@PathVariable Long id){
+		  
 		   
-		   serviceEmpleado.borrarEmpleado(id);
+		   if(serviceEmpleado.borrarEmpleado(id).equals(Boolean.TRUE)){
+				return new RedirectView("/empleado");
+			}else{
+				return new RedirectView("/404");//HAY QUE HACER ESTA PÁGINA DE ERROS
+			}
 		   
 	   }
 	   

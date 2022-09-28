@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
@@ -10,15 +9,17 @@
 </head>
 <body>
 <div class="modal-body">
-    <form class="d-flex flex-column gap-3 align-items-center" > //th:action="@{/persona/udea/mintic/insertarPersonaRol}" th:method="post" th:object="${Npersona}"
-        <input  class="form-control" type="text" placeholder="Nombre"/> //th:field="*{nombre}"
-        <input  class="form-control" type="text" placeholder="Correo"/> //th:field="*{correo}"
-        <input  class="form-control" type="text" placeholder="Empresa"/> //th:field="*{empresa}"
-        <label >Elije un rol:</label> //---------------------SE LE QUITÓ EL for="select"
-        <select  name="select"> //th:field="*{rol}"
-            <option value="value1">Admin</option>
-            <option value="value2" selected>Operativo</option>
+    <h1>Modificar empleado</h1>
+    <form class="d-flex flex-column gap-3 align-items-center" th:action="@{/empleado/actualizarEmpleado/modificacion}" th:method="put" th:object="${Eempleado}" >
+        <input th:field="*{nombre}" class="form-control" type="text" placeholder="Nombre"/> <!-- -->
+        <input th:field="*{correo}" class="form-control" type="text" placeholder="Correo"/> <!-- -->
+        <input th:field="*{empresaAPertenecer}" class="form-control" type="text" placeholder="Empresa"/><!-- -->
+        <label for="select">Elije un rol:</label>
+        <select th:field="*{rol}" name="select"> <!--  -->
+            <option value="Admin">Admin</option>
+            <option value="Operativo" selected>Operativo</option>
         </select>
+        <button type="submit">Editar</button>
     </form>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
