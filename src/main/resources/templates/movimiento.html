@@ -23,6 +23,7 @@
       <tr>
         <th scope="col">Id</th>
         <th scope="col">Empleado</th>
+        <th scope="col">Modificar concepto</th>
         <th scope="col">Monto</th>
         <th scope="col">Editar</th>
         <th scope="col">Eliminar</th>
@@ -34,13 +35,29 @@
       <tr th:each="itemMovimiento : ${movimiento}">
         <td scope="row" th:text="${itemMovimiento.id}"></td>
         <td th:text="${itemMovimiento.empleado}"></td>
+        <td th:text="${itemMovimiento.modificarConcepto}"></td>
         <td th:text="${itemMovimiento.monto}"></td>
-        <td class = "container-editar"> <button onclick = " location.href = '/formularioMovimientoEditar' " id="ventana-botom" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-          Editar Movimiento
-        </button></td>
-        <td class = "container-elimi"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
-          <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
-        </svg></td>
+        
+        
+        <td class = "container-editar"> 
+         <form th:action="@{/formularioMovimientoEditar/{id}(id=${itemMovimiento.id})}" th:method="get">
+          <button onclick = " location.href = '/formularioMovientoEditar' " id="ventana-botom" type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                Editar movimiento
+          </button>
+         </form>
+        </td>
+        
+        
+        <td class = "container-elimi">
+        <!-- dentro le los parentesis le decimos a thymeleaf cual es el dato que tiene que ir a recuperar: -->
+          <form th:action="@{/movimiento/eliminar/{id}(id=${itemMovimiento.id})}" th:method="delete">
+            <button type="submit">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+              <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+            </svg>
+            </button>
+          </form>
+        </td>
       </tr>
 
 
@@ -50,7 +67,7 @@
   </table>
 </div>
 
-<!-- Modal -->
+<!-- Modal 
 <div id="ventana-modal exampleModalCenter" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -65,7 +82,7 @@
           <input  class="form-control" type="text" placeholder="Monto"/> //th:field="*{monto}"
           <input class="form-control" type="text" placeholder="Concepto"/> //th:field="*{concepto}"
           <input  class="form-control" type="text" placeholder="Usuario"/> //th:field="*{usuario}"
-      </form>
+        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -74,7 +91,7 @@
     </div>
   </div>
 </div>
-
+-->
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

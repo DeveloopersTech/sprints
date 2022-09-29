@@ -84,23 +84,6 @@ public class ControllerFrontend {
 		//retornamos el movimiento.html que esta en el template:
 		return "movimiento";
 	}
-
-	//lode pau------------------------------------------------------------------------
-
-	@GetMapping(path= "/formularioMovimiento")
-	//retornaremos cadenas de caracteres (los html)
-	public String formularioMovimiento() {
-
-		//retornamos el movimiento.html que esta en el template:
-		return "formularioMovimiento";
-	}
-	@GetMapping(path= "/formularioEmpresa")
-	//retornaremos cadenas de caracteres (los html)
-	public String formularioEmpresa() {
-
-		//retornamos el movimiento.html que esta en el template:
-		return "formularioEmpresa";
-	}
 	
 
 	@GetMapping(path= "/formularioEmpresaEditar")
@@ -123,7 +106,7 @@ public class ControllerFrontend {
 
 
 
-	//Model Post:
+	//Models:
 	
 	
 	//el Model va a generar la comunicacion entre la vista(los html) y este backend
@@ -139,6 +122,25 @@ public class ControllerFrontend {
 		return "formularioEmpleado";
 	}
 	
+	//retornaremos cadenas de caracteres (los html)
+	@GetMapping(path= "/formularioEmpresa")
+	public String formularioEmpresa(Model modelo) {
+
+		modelo.addAttribute("nuevaEmpresa", new EntityEmpresa());
+
+		//retornamos el movimiento.html que esta en el template:
+		return "formularioEmpresa";
+	}
+	
+	//retornaremos cadenas de caracteres (los html)
+		@GetMapping(path= "/formularioMovimiento")
+		public String formularioMovimiento(Model modelo) {
+
+			modelo.addAttribute("nuevoMovimiento", new EntityMovimientoDinero());
+
+			//retornamos el movimiento.html que esta en el template:
+			return "formularioMovimiento";
+		}
 	
 	//El id es para saber cual es el empleado a editar
 	@GetMapping(path= "/formularioEmpleadoEditar/{id}")
@@ -150,6 +152,28 @@ public class ControllerFrontend {
 		
 		return "formularioEmpleadoEditar";
 	}
+	
+	//El id es para saber cual es el empleado a editar
+		@GetMapping(path= "/formularioEmpresaEditar/{id}")
+		public String formularioEmpresaEditar(Model modelo, @PathVariable Long id){
+			
+			EntityEmpresa empresaTemp= serviceEmpresa.buscarEmpresaId(id);
+			/*enviamos el objeto con la data llena en el modelo*/
+			modelo.addAttribute("Eempresa", empresaTemp);
+			
+			return "formularioEmpresaEditar";
+		}
+		
+		//El id es para saber cual es el empleado a editar
+		@GetMapping(path= "/formularioMovimientoEditar/{id}")
+		public String formularioMovimientoEditar(Model modelo, @PathVariable Long id){
+					
+			EntityMovimientoDinero movimientoTemp= serviceMovimientoDinero.buscarMovimientoId(id);
+			/*enviamos el objeto con la data llena en el modelo*/
+			modelo.addAttribute("Emovimiento", movimientoTemp);
+					
+			return "formularioMovimientoEditar";
+		}
 
 
 

@@ -52,11 +52,35 @@ public class ControllerEmpleado {
 		}
 	   
 	   
-	   @PatchMapping(path="/actualizarEmpleado/modificacion", produces= MediaType.APPLICATION_JSON_VALUE, consumes= MediaType.APPLICATION_JSON_VALUE)
-	    public ResponseEntity<Boolean> actualizarEmpleado(@RequestBody EntityEmpleado empleado){
+	   @PatchMapping(path="/actualizarEmpleado/modificacion")
+	    public RedirectView actualizarEmpleadoParcial(@ModelAttribute EntityEmpleado empleado, Model modelo){
 
-		   return new ResponseEntity<Boolean>(serviceEmpleado.actualizarParcialEmpleado(empleado), HttpStatus.OK);
-	   }
+		   
+		 //con la instancia new le entragamos al frontend el modelo de empleado vacio:
+			modelo.addAttribute("Nueempleado", empleado);
+			//entonces si es true la insercion del empleado a la DB nos redireccionara a la pagina /empleado
+			if(serviceEmpleado.actualizarParcialEmpleado(empleado).equals(Boolean.TRUE)){
+				return new RedirectView("/empleado");
+			}else{
+				return new RedirectView("/404");//HAY QUE HACER ESTA PÁGINA DE ERROS
+			}
+		}
+	   
+	   
+	   
+	   @PutMapping(path="/actualizarEmpleado")
+	    public RedirectView actualizarEmpleado(@ModelAttribute EntityEmpleado empleado, Model modelo){
+
+		   
+		 //con la instancia new le entragamos al frontend el modelo de empleado vacio:
+			modelo.addAttribute(empleado);
+			//entonces si es true la insercion del empleado a la DB nos redireccionara a la pagina /empleado
+			if(serviceEmpleado.actualizarEmpleado(empleado).equals(Boolean.TRUE)){
+				return new RedirectView("/empleado");
+			}else{
+				return new RedirectView("/404");//HAY QUE HACER ESTA PÁGINA DE ERROS
+			}
+		}
 	   
 	   @DeleteMapping(path= "/eliminar/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
 	    public RedirectView eliminarEmpleado(@PathVariable Long id){

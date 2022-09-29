@@ -10,11 +10,11 @@
 </head>
 <body>
 <div class="modal-body">
-    <form class="d-flex flex-column gap-3 align-items-center" > //th:action="@{/persona/udea/mintic/insertarPersonaRol}" th:method="post" th:object="${Npersona}"
-        <input  class="form-control" type="text" placeholder="Monto"/> //th:field="*{nombre}"
-        <input  class="form-control" type="text" placeholder="Modificar Concepto"/> //th:field="*{correo}"
-        <input  class="form-control" type="text" placeholder="Empleado"/> //th:field="*{empresa}"
-
+    <form class="d-flex flex-column gap-3 align-items-center" th:action="@{/movimiento/registrar}" th:method="post" th:object="${nuevoMovimiento}" >
+        <input th:field="*{monto}" class="form-control" type="text" placeholder="Monto"/>
+        <input th:field="*{modificarConcepto}" class="form-control" type="text" placeholder="Modificar Concepto"/>
+        <input th:field="*{empleado}" class="form-control" type="text" placeholder="Empleado"/> 
+        <button class = "btn btn-primary" type="submit">Enviar</button>
     </form>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>

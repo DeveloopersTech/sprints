@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import co.com.project.crud.techadmin.model.Empresa;
+import co.com.project.crud.techadmin.repository.EntityEmpleado;
 import co.com.project.crud.techadmin.repository.EntityEmpresa;
 import co.com.project.crud.techadmin.repository.EntityEmpresa;
 import co.com.project.crud.techadmin.repository.RepositoryEmpresa;
@@ -38,6 +39,29 @@ public class ServiceEmpresa {
     	
     	return true;	
     }
+    
+  //Buscar persona por Id:
+    public EntityEmpresa buscarEmpresaId( Long id ) {
+    	
+    	EntityEmpresa empresaTemp= repositoryEmpresa.findById(id).orElse(null);
+    	
+    	return empresaTemp;
+    }
+    
+    
+  //actualizacion Put:
+    public Boolean actualizarEmpresa(EntityEmpresa empresa) {
+    	
+    	try {
+    		repositoryEmpresa.save(empresa);
+    	}catch(Exception e) {
+    		return Boolean.FALSE;
+    	}
+    	
+    	return Boolean.TRUE;
+    	
+    }
+    
     
     //actualización parcial PATCH:
     public Boolean actualizarParcialEmpresa(EntityEmpresa empresa) {
@@ -75,10 +99,16 @@ public class ServiceEmpresa {
     }
     
     
-    //Delete empresa:
-    public void borrarEmpresa(Long id) {
+    //Delete empleado:
+    public Boolean borrarEmpresa(Long id) {
     	
+    	if(id != null) {
     	repositoryEmpresa.deleteById(id);
+    	
+    	return true;
+    	}
+    	
+    	return false;
     }
 	
 	

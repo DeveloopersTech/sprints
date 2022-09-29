@@ -1,5 +1,6 @@
 package co.com.project.crud.techadmin.services;
 
+import co.com.project.crud.techadmin.repository.EntityEmpresa;
 import co.com.project.crud.techadmin.repository.EntityMovimientoDinero;
 import co.com.project.crud.techadmin.repository.RepositoryMovimientoDinero;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,26 @@ public class ServiceMovimientoDinero {
         }
 
         return true;
+    }
+    
+    //Buscar persona por Id:
+    public EntityMovimientoDinero buscarMovimientoId( Long id ) {
+    	
+    	EntityMovimientoDinero movimientoTemp= repositoryMovimientoDinero.findById(id).orElse(null);
+    	
+    	return movimientoTemp;
+    }
+    
+    //actualizacion Put:
+    public Boolean actualizarMovimientoDinero(EntityMovimientoDinero movimiento) {
+    	
+    	try {
+    		repositoryMovimientoDinero.save(movimiento);
+    	}catch(Exception e) {
+    		return Boolean.FALSE;
+    	}
+    	
+    	return Boolean.TRUE;
     }
 
     //actualización parcial PATCH:
@@ -59,11 +80,17 @@ public class ServiceMovimientoDinero {
 
     }
 
-
-    //Delete movimientoDinero:
-    public void borrarMovimientoDinero(Long id) {
-
-        repositoryMovimientoDinero.deleteById(id);
+    
+  //Delete empleado:
+    public Boolean borrarMovimientoDinero(Long id) {
+    	
+    	if(id != null) {
+    	repositoryMovimientoDinero.deleteById(id);
+    	
+    	return true;
+    	}
+    	
+    	return false;
     }
 
 

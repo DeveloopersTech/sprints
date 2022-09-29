@@ -6,16 +6,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.view.RedirectView;
 
 import co.com.project.crud.techadmin.model.Empresa;
+import co.com.project.crud.techadmin.repository.EntityEmpleado;
 import co.com.project.crud.techadmin.repository.EntityEmpresa;
 import co.com.project.crud.techadmin.services.ServiceEmpresa;
 import co.com.project.crud.techadmin.services.ServiceEmpresa;
@@ -31,11 +36,11 @@ public class ControllerEmpresa {
 	  return new ResponseEntity<Object>(serviceEmpresa.listarEmpresas(), HttpStatus.OK);
    }
 
-   @PostMapping(path = "/registrar", produces= MediaType.APPLICATION_JSON_VALUE, consumes= MediaType.APPLICATION_JSON_VALUE)
+   /*@PostMapping(path = "/registrar", produces= MediaType.APPLICATION_JSON_VALUE, consumes= MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Boolean> registrar(@RequestBody EntityEmpresa empleado){
 	       
 	   return new ResponseEntity<Boolean>(serviceEmpresa.insertarEmpresa(empleado), HttpStatus.OK);      
-   }
+   }*/
    
    @PatchMapping(path="/actualizarEmpresa/modificacion", produces= MediaType.APPLICATION_JSON_VALUE, consumes= MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Boolean> actualizarEmpresa(@RequestBody EntityEmpresa empleado){
@@ -43,12 +48,53 @@ public class ControllerEmpresa {
 	   return new ResponseEntity<Boolean>(serviceEmpresa.actualizarParcialEmpresa(empleado), HttpStatus.OK);
    }
    
-   @DeleteMapping(path= "/eliminar/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
+   /*@DeleteMapping(path= "/eliminar/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
     public void eliminarEmpresa(@PathVariable Long id){
 	   
 	   serviceEmpresa.borrarEmpresa(id);
 	   
-   }
+   }*/
+   
+   //Post:
+   
+   @PostMapping(path= "/registrar")
+	public RedirectView formularioEmpresa(@ModelAttribute EntityEmpresa empresa, Model modelo){
+
+		//con la instancia new le entragamos al frontend el modelo de empleado vacio:
+		modelo.addAttribute("nuevaEmpresa", empresa);
+		//entonces si es true la insercion del empleado a la DB nos redireccionara a la pagina /empleado
+		if(serviceEmpresa.insertarEmpresa(empresa).equals(Boolean.TRUE)){
+			return new RedirectView("/empresa");
+		}else{
+			return new RedirectView("/404");//HAY QUE HACER ESTA PÁGINA DE ERROS
+		}
+
+	}
+   
+   @PutMapping(path="/actualizarEmpresa")
+   public RedirectView actualizarEmpleado(@ModelAttribute EntityEmpresa empresa, Model modelo){
+
+	   
+	 //con la instancia new le entragamos al frontend el modelo de empleado vacio:
+		modelo.addAttribute(empresa);
+		//entonces si es true la insercion del empleado a la DB nos redireccionara a la pagina /empleado
+		if(serviceEmpresa.actualizarEmpresa(empresa).equals(Boolean.TRUE)){
+			return new RedirectView("/empresa");
+		}else{
+			return new RedirectView("/404");//HAY QUE HACER ESTA PÁGINA DE ERROS
+		}
+	}
+   
+   @DeleteMapping(path= "/eliminar/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
+   public RedirectView eliminarEmpresa(@PathVariable Long id){
+	  
+	   
+	   if(serviceEmpresa.borrarEmpresa(id).equals(Boolean.TRUE)){
+			return new RedirectView("/empresa");
+		}else{
+			return new RedirectView("/404");//HAY QUE HACER ESTA PÁGINA DE ERROS
+		}   
+  }
 
 /*
    @GetMapping(path= "/lista", produces= MediaType.APPLICATION_JSON_VALUE)
@@ -88,7 +134,6 @@ public class ControllerEmpresa {
 
 
     @PatchMapping(path="/actualizarEmpresa/{id}/modificacion", produces= MediaType.APPLICATION_JSON_VALUE)
-    // OJOOOOOOOOOOOOOOOOOOOOOOOOOOO
     public ResponseEntity<Empresa> actualizarEmpresa(@PathVariable int id, @RequestBody Empresa modificacion){
 
     	boolean salida = serviceEmpresa.actualizarEmpresa(id, modificacion);

@@ -41,6 +41,20 @@ public class ServiceEmpleado {
     	return empleadoTemp;
     }
     
+    //actualizacion Put:
+    public Boolean actualizarEmpleado (EntityEmpleado empleado) {
+    	
+    	try {
+    		repositoryEmpleado.save(empleado);
+    	}catch(Exception e) {
+    		return Boolean.FALSE;
+    	}
+    	
+    	return Boolean.TRUE;
+    	
+    }
+    
+    
     //actualización parcial PATCH:
     public Boolean actualizarParcialEmpleado(EntityEmpleado empleado) {
     

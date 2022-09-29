@@ -9,11 +9,12 @@
 </head>
 <body>
 <div class="modal-body">
-    <form class="d-flex flex-column gap-3 align-items-center" > //th:action="@{/persona/udea/mintic/insertarPersonaRol}" th:method="post" th:object="${Npersona}"
-        <input  class="form-control" type="text" placeholder="Nombre"/> //th:field="*{nombre}"
-        <input  class="form-control" type="text" placeholder="Teléfono"/> //th:field="*{correo}"
-        <input  class="form-control" type="text" placeholder="Dirección"/> //th:field="*{empresa}"
-        <input  class="form-control" type="text" placeholder="NIT"/> //th:field="*{empresa}"
+    <form class="d-flex flex-column gap-3 align-items-center" th:action="@{/enterprises/registrar}" th:method="post" th:object="${nuevaEmpresa}" >
+        <input th:field="*{nombre}" class="form-control" type="text" placeholder="Nombre"/> 
+        <input th:field="*{telefono}" class="form-control" type="text" placeholder="Teléfono"/> 
+        <input th:field="*{direccion}" class="form-control" type="text" placeholder="Dirección"/> 
+        <input th:field="*{nit}" class="form-control" type="text" placeholder="NIT"/> 
+        <button class = "btn btn-primary" type="submit">Enviar</button>
     </form>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
