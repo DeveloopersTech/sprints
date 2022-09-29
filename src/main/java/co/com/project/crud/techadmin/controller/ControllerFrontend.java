@@ -10,6 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
+import co.com.project.crud.techadmin.repository.EntityUser;
+import co.com.project.crud.techadmin.services.ServiceUser;
 
 import co.com.project.crud.techadmin.repository.EntityEmpleado;
 import co.com.project.crud.techadmin.services.ServiceEmpleado;
@@ -29,23 +33,29 @@ public class ControllerFrontend {
 	@Autowired
 	ServiceMovimientoDinero serviceMovimientoDinero;
 
+	@Autowired
+	ServiceUser serviceUser;
+
 			
 	
 	//lo marcamos como una interfaz Rest
 	//renderizaremos el home.html en la raiz (/):
-	@GetMapping(path= "/")
+	@GetMapping(path= "/index")
 	//retornaremos cadenas de caracteres (los html)
 	public String index() {
 		
 		//retornamos el index.html que esta en el template:
 		return "index";
 	}
-	
-	@GetMapping(path= "/home")
+
+	@GetMapping(path= "/")
 	//retornaremos cadenas de caracteres (los html)
-	public String home() {
-		
-		//retornamos el index.html que esta en el template:
+	public String home(Model model, @AuthenticationPrincipal OidcUser principal) {
+		if (principal != null){
+			EntityUser user = this.serviceUser.getOrCreateUser(principal.getClaims());
+			model.addAttribute("user", user);
+		}
+
 		return "home";
 	}
 	
