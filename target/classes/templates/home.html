@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/styleshome.css">
+</head>
+<body>
+<div class="contenedorLogin">
+    <h1>Inicio de Sesión</h1>
+    <div class="logo">
+        <img src="/mintic.png" />
+    </div>
+    <div sec:authorize="!isAuthenticated()">
+        <a th:href="@{/oauth2/authorization/auth0}" class="btn">Log In</a>
+    </div>
+    <div sec:authorize="isAuthenticated()">
+        <h3 th:text="'Bienvenido, ' + ${user.getEmail()}"></h3>
+        <a th:href="@{/index}" class="btn">Autenticado</a>
+    </div>
+
+</div>
+<div class="etiquetas">
+    <h2>Sistema de Gestión Company</h2>
+</div>
+</body>
+</html>
